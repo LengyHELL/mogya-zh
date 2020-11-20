@@ -14,9 +14,14 @@ var BuildingLength;
 var Rows{SetRows, ProductGroups} binary;
 var CashierRows{SetCashierRows, ProductGroups} binary;
 
-s.t. noraml_row_length{s in SetRows}: BuildingLength >= sum{p in ProductGroups} Rows[s, p] * space[p];
-s.t. cashier_row_length{s in SetCashierRows}: BuildingLength >= cashierLength + sum{p in ProductGroups} CashierRows[s, p] * space[p];
-s.t. one_group_once{p in ProductGroups}: sum{sr in SetRows} Rows[sr, p] + sum{scr in SetCashierRows} CashierRows[scr, p] = 1;
+s.t. noraml_row_length{s in SetRows}:
+  BuildingLength >= sum{p in ProductGroups} Rows[s, p] * space[p];
+
+s.t. cashier_row_length{s in SetCashierRows}:
+  BuildingLength >= cashierLength + sum{p in ProductGroups} CashierRows[s, p] * space[p];
+
+s.t. one_group_once{p in ProductGroups}:
+  sum{sr in SetRows} Rows[sr, p] + sum{scr in SetCashierRows} CashierRows[scr, p] = 1;
 
 minimize length_of_building: BuildingLength;
 
