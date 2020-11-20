@@ -14,7 +14,7 @@ var BuildingLength;
 var Rows{SetRows, ProductGroups} binary;
 var CashierRows{SetCashierRows, ProductGroups} binary;
 
-s.t. noraml_row_length{s in SetRows}:
+s.t. normal_row_length{s in SetRows}:
   BuildingLength >= sum{p in ProductGroups} Rows[s, p] * space[p];
 
 s.t. cashier_row_length{s in SetCashierRows}:
